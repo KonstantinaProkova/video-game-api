@@ -1,0 +1,238 @@
+{
+	"info": {
+		"_postman_id": "eed850b2-5517-4ec5-994e-209e2e3695e2",
+		"name": "Game API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32597173"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\" : \"Konstantina\",\n    \"email\" : \"konstantina.prokova@gmail.com\",\n    \"password\" : \"12345678\",\n    \"role\" : \"Admin\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/register",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"register"
+							]
+						},
+						"description": "### Register New User\n\nThis endpoint is used to register a user by sending a POST request to the specified URL. The request should include a JSON payload in the raw request body type with the user's name, email, password, role. All the above are required.\n\n#### Request Body\n\n- `email` (string, required): The email of the user.\n    \n- `password` (string, required): The password associated with the user's account.\n    \n- `name` (string, required): The name of the user.\n    \n- `role` (string, required): The available roles are : Admin, User\n    \n\n### Response\n\nUpon successful creation, the server will respond with a status code of 201 and a JSON object in the response body with the following structure:\n\n``` json\n{\n    \"message\": \"\",\n    \"data\": {\n        \"id\": 0,\n        \"name\": \"\",\n        \"email\": \"\",\n        \"role\": \"\",\n        \"created_at\": \"\",\n        \"updated_at\": \"\"\n    }\n}\n\n ```\n\nThe `data` object contains the user's information including their ID, name, email, role, and timestamps for creation and update."
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\" : \"konstantina.prokova@gmail.com\",\n    \"password\" : \"12345678\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/login",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"login"
+							]
+						},
+						"description": "### Login User\n\nThis endpoint is used to authenticate a user by sending a POST request to the specified URL. The request should include a JSON payload in the raw request body type with the user's email and password.\n\n#### Request Body\n\n- `email` (string, required): The email of the user for authentication.\n    \n- `password` (string, required): The password associated with the user's account.\n    \n\n### Response\n\nUpon successful authentication, the server will respond with a status code of 200 and a JSON object in the response body with the following structure:\n\n``` json\n{\n    \"message\": \"\",\n    \"data\": {\n        \"id\": 0,\n        \"name\": \"\",\n        \"email\": \"\",\n        \"email_verified_at\": null,\n        \"role\": \"\",\n        \"created_at\": \"\",\n        \"updated_at\": \"\"\n    }\n}\n\n ```\n\nThe `data` object contains the user's information including their ID, name, email, role, and timestamps for creation and update.\n\n**Authentication cookies will be also set on the client.**"
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/logout",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"logout"
+							]
+						},
+						"description": "### Logout\n\nThis endpoint is used to log out the user from the application. **Authentication cookies must exist in order to logout**.\n\n#### Response\n\nUpon successful execution, the server returns a JSON response with a status code of 200 and a content type of \"application/json\". The response schema for this request is as follows:\n\n``` json\n{\n    \"type\": \"object\",\n    \"properties\": {\n        \"message\": {\n            \"type\": \"string\"\n        }\n    }\n}\n\n ```"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Games",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\" : \"Witcher 3\",\n    \"description\" : \"Gerald of Rivia back on the path once again\",\n    \"release_date\" : \"2015-05-21\",\n    \"genre\" : \"rpg\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/games",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"games"
+							]
+						},
+						"description": "### Create a New Game\n\nThis endpoint allows you to create a new game entry in the database.\n\n**Restricted route. Authentication cookies are required.**\n\n#### Request Body\n\n- `title` (string, required): The title of the game.\n    \n- `description` (string, required): A brief description of the game.\n    \n- `release_date` (string, required): The release date of the game in the format \"YYYY-MM-DD\".\n    \n- `genre` (string, required): The genre of the game.\n    \n\nAvailable genres : `'action', 'adventure', 'rpg', 'shooter', 'strategy', 'simulation','horror', 'puzzle', 'racing', 'fighting', 'sports', 'platformer','open-world', 'stealth', 'survival', 'battle royale', 'metroidvania','roguelike', 'mmo', 'sandbox'`\n\nExample:\n\n``` json\n{\n    \"title\": \"Witcher 3\",\n    \"description\": \"Gerald of Rivia back on the pa ...\",\n    \"release_date\": \"2015-05-21\",\n    \"genre\": \"rpg\"\n}\n\n ```\n\n#### Response\n\nUpon successful creation, the server will respond with a status code of 201 and a JSON object in the response body with the following structure:\n\n``` json\n{\n    \"message\": \"\",\n    \"data\": {\n        \"title\": \"\",\n        \"description\": \"\",\n        \"release_date\": \"\",\n        \"genre\": \"\",\n        \"user_id\": 0,\n        \"updated_at\": \"\",\n        \"created_at\": \"\",\n        \"id\": 0\n    }\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "Read",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/games",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"games"
+							]
+						},
+						"description": "### Fetch User Games\n\nThis endpoint retrieves a list of games.\n\n**Restricted route. Authentication cookies are required.**\n\n#### Request\n\nNo request body is required for this endpoint.\n\n#### Response\n\nThe response status will be 200. A JSON object with a `data` key, containing an array of game objects will be presented.\n\nExample Response:\n\n``` json\n{\n    \"data\": [\n        {\n            \"id\": 0,\n            \"title\": \"\",\n            \"description\": \"\",\n            \"release_date\": \"\",\n            \"genre\": \"\",\n            \"created_at\": \"\",\n            \"updated_at\": \"\",\n            \"user_id\": 0\n        }\n    ]\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Witcher 4\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/games/2",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"games",
+								"2"
+							]
+						},
+						"description": "### Update Game Details\n\nThis endpoint allows the client to update the details of a specific game by sending an HTTP PUT request to the specified URL.\n\n**Restricted route. Authentication cookies are required.**\n\n#### Request Body\n\n- `title` (string, optional): The title of the game.\n    \n- `description` (string, optional): A brief description of the game.\n    \n- `release_date` (string, optional): The release date of the game in the format \"YYYY-MM-DD\".\n    \n- `genre` (string, optional): The genre of the game.\n    \n\n#### Response\n\nThe response will be in JSON format with the following schema:\n\n``` json\n{\n    \"message\": \"\",\n    \"data\": {\n        \"title\": \"\",\n        \"description\": \"\",\n        \"release_date\": \"\",\n        \"genre\": \"\",\n        \"user_id\": 0,\n        \"updated_at\": \"\",\n        \"created_at\": \"\",\n        \"id\": 0\n    }\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/games/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"games",
+								"1"
+							]
+						},
+						"description": "### Delete Game\n\nThis endpoint sends a request to delete a game. ID is required.\n\n**Restricted route. Authentication cookies are required.**\n\n#### Request Body\n\nThis request does not require a request body.\n\n#### Response\n\nThe response will contain the data of the deleted game. Schema:\n\n``` json\n{\n    \"message\": \"\",\n    \"data\": {\n        \"title\": \"\",\n        \"description\": \"\",\n        \"release_date\": \"\",\n        \"genre\": \"\",\n        \"user_id\": 0,\n        \"updated_at\": \"\",\n        \"created_at\": \"\",\n        \"id\": 0\n    }\n}\n\n ```"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
