@@ -11,8 +11,8 @@ The **Simple Video Game Management System API** allows users to manage a collect
 - Delete games
 
 ## Technologies Used
-- PHP (Laravel)
-- MySQL
+- PHP 8.1 (Laravel)
+- MySQL (MariaDB 10.6)
 - RESTful API principles
 
 
